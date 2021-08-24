@@ -34,7 +34,7 @@
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">R M S</span>
+      <span class="brand-text font-weight-light fs-3">R M S</span>
     </a>
 
     <!-- Sidebar -->
@@ -45,7 +45,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin Name</a>
+          <a href="#" class="d-block fs-5">Abu Sayed Rana</a>
         </div>
       </div>
 

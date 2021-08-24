@@ -1,3 +1,4 @@
+<?php $mysqli = new mysqli("localhost","root","", "wdpf47_rms") or die("Connection error")?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
 
@@ -30,7 +31,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>10</h3>
 
                 <p>New Orders</p>
               </div>
@@ -45,9 +46,9 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>530 &#2547;</h3>
 
-                <p>Bounce Rate</p>
+                <p>Today Sale</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -62,7 +63,7 @@
               <div class="inner">
                 <h3>44</h3>
 
-                <p>User Registrations</p>
+                <p>Order Served</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -75,9 +76,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>6500 &#2547;</h3>
 
-                <p>Unique Visitors</p>
+                <p>All Tiime  Sale</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>

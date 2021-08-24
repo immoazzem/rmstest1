@@ -1,3 +1,4 @@
+<?php $mysqli = new mysqli("localhost","root","", "wdpf47_rms") or die("Connection error")?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
 
@@ -26,6 +27,18 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 col-xs-12">
+            <?php 
+            if(isset($_POST['submit']))
+            {
+              extract($_POST);
+              $name = $_POST["store_name"];
+              $active = $_POST['active'];
+              $query = "INSERT INTO stores(name, active)
+              VALUES('$name','$active')";
+              $result = $mysqli->query($query);
+              
+            }
+            ?>
             <div id="messages"></div>
 
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add Store</button>
@@ -90,7 +103,7 @@
   </div>
 
   <!-- create-edit-modal -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+  <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -121,7 +134,7 @@
   </div>
 
   <!-- create-edit-modal -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+  <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -140,6 +153,24 @@
       </div>
     </div>
   </div>
+  <script>
+    $(document).ready(function(){
+      $("#creteForm").unbind('submit').on('submit',function(){
+        
+        $.ajax({
+          url: "stores.php",
+          method: "POST",
+          data: $("#createForm").serialize(),
+          success:function(data){
+            $('#createForm')[0].reset;
+            $('#addModal').modal('hide');
+            $('#manageTable').html(data);
+          }
+        });
+        
+      });
+    });
+  </script>
 
 <?php require_once "partials/_footer.php"; ?>
 
