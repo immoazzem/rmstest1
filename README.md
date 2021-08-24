@@ -6,5 +6,6 @@
 
 - Open gitbash/SSH/ZSH/CMD/POWERSHELL in the directory folder.
 - Clone the repo
-- Open SSH/ZSH/CMD/POWERSHELL in the directory folder.
 - Run `yarn install`
+- create a database named `wdpf_rms`
+- import database
