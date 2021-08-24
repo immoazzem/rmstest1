@@ -1,0 +1,52 @@
+
+
+Popper JS 2.9.3
+yarn add @popperjs/core --save
+yarn remove @popperjs/core
+
+
+Fontawesome
+yarn add @fortawesome/fontawesome-free --save
+
+overlayScrollbars
+yarn add overlayscrollbars --save
+
+tempusdominus-bootstrap-4
+yarn add tempusdominus-bootstrap-4 --save
+
+Daterange picker
+yarn add daterangepicker --save
+
+
+Moment JS
+yarn add moment --save
+
+summernote
+yarn add summernote --save
+
+jquery-ui
+yarn add jquery-ui-dist --save
+
+codemirror
+yarn add codemirror --save
+
+
+BS Stepper
+yarn add bs-stepper --save
+
+datatables.net-responsive
+yarn add datatables.net-responsive --save
+
+datatables.net-buttons
+yarn remove datatables.net-buttons --save
+
+datatables.net
+yarn add datatables.net --save
+
+yarn add datatables.net-bs5
+
+yarn add datatables.net-responsive-bs5
+
+yarn add datatables.net-buttons-bs5 --save
+
+yarn add datatables --save
