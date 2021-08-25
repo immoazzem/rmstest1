@@ -32,6 +32,6 @@
   <!-- BS Stepper -->
   <link rel="stylesheet" href="node_modules/bs-stepper/dist/css/bs-stepper.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed text-sm">
+<body class="hold-transition sidebar-mini layout-fixed text-sm accent-purple">
 <div class="wrapper">
    

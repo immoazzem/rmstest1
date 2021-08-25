@@ -1,5 +1,5 @@
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-purple navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -30,7 +30,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-purple-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -83,22 +83,68 @@
               </li>
             </ul>
           <li class="nav-item">
-            <a href="stores.php" class="nav-link">
+            <a href="" class="nav-link">
               <i class="fas fa-store-alt nav-icon"></i>
               <p>Stores</p>
+              <i class="fas fa-angle-left right"></i>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="addstore.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Store</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="managestores.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Stores</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a href="tables.php" class="nav-link">
+            <a href="" class="nav-link">
               <i class="fas fa-tablets nav-icon"></i>
               <p>Tables</p>
+              <i class="fas fa-angle-left right"></i>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="addtable.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Table</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="managetables.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Tables</p>
+                </a>
+              </li>
+            </ul>
           </li>
+          
           <li class="nav-item">
-            <a href="category" class="nav-link">
+            <a href="" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Category</p>
+              <i class="fas fa-angle-left right"></i>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="addcategory.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Category</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="managecategories.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Categories</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="" class="nav-link">
@@ -141,7 +187,6 @@
                 </a>
               </li>
             </ul>
-            
           </li>
           <li class="nav-item">
             <a href="profile.php" class="nav-link">
@@ -156,24 +201,9 @@
             </a>
           </li>
           <li class="nav-item">
-               <a href="pages/examples/login-v2.html" class="nav-link">
+               <a href="logout.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Login v2</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/examples/register-v2.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Register v2</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
-              </p>
+                <p>Login Out</p>
             </a>
           </li>
         </ul>
