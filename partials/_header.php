@@ -20,7 +20,7 @@
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="node_modules/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="dist/css/adminlte.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="node_modules/overlayscrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -32,6 +32,6 @@
   <!-- BS Stepper -->
   <link rel="stylesheet" href="node_modules/bs-stepper/dist/css/bs-stepper.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed text-sm accent-purple">
+<body class="layout-fixed control-sidebar-slide-open text-sm layout-footer-fixed">
 <div class="wrapper">
    

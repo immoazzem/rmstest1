@@ -1,5 +1,5 @@
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-purple navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-dark navbar-teal">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -30,9 +30,9 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-purple-primary elevation-4">
+  <aside class="main-sidebar elevation-4 sidebar-light-teal">
     <!-- Brand Logo -->
-    <a href="index.php" class="brand-link">
+    <a href="index.php" class="brand-link navbar-teal">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light fs-3">R M S</span>
     </a>
@@ -51,16 +51,16 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-compact" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          <li class="nav-item" id="dashboardMainMenu">
             <a href="index.php" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="userMainMenu">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -68,142 +68,157 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-treeview">
+              <li class="nav-item" id="createUserSubMenu">
                 <a href="adduser.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-folder-plus nav-icon"></i>
                   <p>Add User</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id="manageUserSubMenu">
                 <a href="manageusers.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-tasks nav-icon"></i>
                   <p>Manage Users</p>
                 </a>
               </li>
             </ul>
-          <li class="nav-item">
+          <li class="nav-item" id="storesMainMenu">
             <a href="" class="nav-link">
               <i class="fas fa-store-alt nav-icon"></i>
               <p>Stores</p>
               <i class="fas fa-angle-left right"></i>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <li class="nav-item" id="createStoreSubMenu">
                 <a href="addstore.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-folder-plus nav-icon"></i>
                   <p>Add Store</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id="manageStoreSubMenu">
                 <a href="managestores.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-tasks nav-icon"></i>
                   <p>Manage Stores</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="tableMainMenu">
             <a href="" class="nav-link">
               <i class="fas fa-tablets nav-icon"></i>
               <p>Tables</p>
               <i class="fas fa-angle-left right"></i>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <li class="nav-item" id="createTableSubMenu">
                 <a href="addtable.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-folder-plus nav-icon"></i>
                   <p>Add Table</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id="manageTableSubMenu">
                 <a href="managetables.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-tasks nav-icon"></i>
                   <p>Manage Tables</p>
                 </a>
               </li>
             </ul>
           </li>
           
-          <li class="nav-item">
+          <li class="nav-item" id="categoryMainMenu">
             <a href="" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-folder-minus nav-icon"></i>
               <p>Category</p>
               <i class="fas fa-angle-left right"></i>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" id="createCategorySubMenu">
               <li class="nav-item">
                 <a href="addcategory.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-folder-plus nav-icon"></i>
                   <p>Add Category</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id="manageCategorySubMenu">
                 <a href="managecategories.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-tasks nav-icon"></i>
                   <p>Manage Categories</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="productMainNav">
             <a href="" class="nav-link">
               <i class="fas fa-utensils nav-icon"></i>
               <p>Product</p>
               <i class="fas fa-angle-left right"></i>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <li class="nav-item" id="createProductSubMenu">
                 <a href="addproduct.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-folder-plus nav-icon"></i>
                   <p>Add Product</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id="manageProductSubMenu">
                 <a href="manageproducts.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-tasks nav-icon"></i>
                   <p>Manage Products</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="orderMainMenu">
             <a href="" class="nav-link">
             <i class="fas fa-calendar-minus nav-icon"></i>
               <p>Order</p>
               <i class="fas fa-angle-left right"></i>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <li class="nav-item" id="createOrderSubMenu">
                 <a href="addorder.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-folder-plus nav-icon"></i>
                   <p>Add Order</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="manageordes.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+              <li class="nav-item" id="manageOrderSubMenu">
+                <a href="manageorders.php" class="nav-link">
+                  <i class="fas fa-tasks nav-icon"></i>
                   <p>Manage Orders</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="profileMainMenu">
             <a href="profile.php" class="nav-link">
             <i class="fas fa-id-badge nav-icon"></i>
               <p>Profile</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="groupMainMenu">
             <a href="pages/examples/contacts.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Contacts</p>
+              <i class="fas fa-object-group nav-icon"></i>
+              <p>Groups</p>
+              <i class="fas fa-angle-left right"></i>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" id="createGroupSubMenu">
+                <a href="addgroup.php" class="nav-link">
+                  <i class="fas fa-folder-plus nav-icon"></i>
+                  <p>Add Group</p>
+                </a>
+              </li>
+              <li class="nav-item" id="manageGroupSubMenu">
+                <a href="managroups.php" class="nav-link">
+                  <i class="fas fa-tasks nav-icon"></i>
+                  <p>Manage Groups</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
-               <a href="logout.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Login Out</p>
+            <a href="logout.php" class="nav-link">
+              <i class="fas fa-sign-out-alt nav-icon"></i>
+              <p>Logout</p>
             </a>
           </li>
         </ul>
