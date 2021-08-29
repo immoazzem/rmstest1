@@ -1,6 +1,5 @@
 ## Restaurant Management System
 
-- yarn package manager must be installed
 
 ## Installation
 
