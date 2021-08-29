@@ -2,7 +2,7 @@
 
 - yarn package manager must be installed
 
-##Installation
+## Installation
 
 - Open gitbash/SSH/ZSH/CMD/POWERSHELL in the directory folder.
 - Clone the repo

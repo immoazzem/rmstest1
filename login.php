@@ -1,9 +1,30 @@
+<?php
+session_start();
+require_once 'partials/function.php';
+$msg = '';
+if(isset($_POST['submit']))
+{
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $query = "SELECT * FROM users WHERE email='$email' AND password = '$password'";
+  $res = $mysqli->query($query);
+  if ($res->num_rows>0) {
+    $_SESSION['IS_LOGIN']='yes';
+    header('index.php');
+  } else {
+    $msg =  "<span class='mb-1 bg-danger p-1'>incorrect email/password</span>"; 
+  }
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in (v2)</title>
+  <title>Admin Login</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -22,9 +43,9 @@
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="../../index3.html" method="post">
+      <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" name="email" class="form-control" placeholder="Email" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -32,7 +53,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -43,16 +64,19 @@
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
+              <label for="remember">Remember Me</label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" name="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
           <!-- /.col -->
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div><?php echo $msg; ?></div>
+          </div>
         </div>
       </form>
 

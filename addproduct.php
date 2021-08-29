@@ -110,7 +110,8 @@
   <!-- /.content-wrapper -->
   <script>
     $(document).ready(function() {
-      $('.js-example-basic-multiple').select2();
+      $("#productMainNav").addClass('active');
+      $("#createProductSubMenu").addClass('active');
     });
 
   </script>

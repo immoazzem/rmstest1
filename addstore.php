@@ -1,5 +1,18 @@
+<?php $mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms'); ?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
+<?php
+  if(isset($_POST['submit']))
+  {
+    $name = $_POST['store_name'];
+    $active = $_POST['active'];
+    $sql = "INSERT INTO stores(name,active) VALUES('$name','$active')";
+    $res = $mysqli->query($sql);
+    if($mysqli->affected_rows){
+      $msg = "Added successfully";
+    }
+  }
+?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -34,6 +47,7 @@
                   <div class="box-header">
                     <h5 class="box-title">Add Stores</h5>
                   </div>
+                  <div><?php echo $msg;?></div>
                 <form role="form" action="" method="post" id="createForm">
                   <div class="box-body">
                     <div class="form-group">
@@ -50,7 +64,7 @@
                   </div>
                   <div class="box-footer">
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Save</button>
+                      <button type="submit" name="submit" class="btn btn-primary">Save</button>
                       <button type="reset" class="btn btn-warning">Reset</button>
                     </div>
                   </div>

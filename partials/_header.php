@@ -1,3 +1,13 @@
+<?php
+// session_start();
+// require_once 'partials/database.inc.php';
+// require_once 'partials/function.php';
+// if(isset($_SESSION['IS_LOGIN']))
+// {
+//   header('location:login.php');
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

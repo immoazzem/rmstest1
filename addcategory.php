@@ -1,5 +1,14 @@
+<?php require_once 'partials/function.php';?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
+<?php
+$objAdminDb = new AdminDb;
+if(isset($_POST['submit']))
+{
+  $objAdminDb->add_cat($_POST);
+}
+?>
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -27,14 +36,29 @@
         <div class="row">
           <div class="col-md-12 col-xs-12">
             <div class="box-header">
-
+              <h4 class="modal-title">Add Category</h4>
             </div>
+          <form role="form" action="" method="post" id="createForm">
             <div class="box-body">
-
+              <div class="form-group">
+                <label for="brand_name">Category Name</label>
+                <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter category name" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label for="active">Status</label>
+                <select class="form-control" id="active" name="active">
+                  <option value="1">Active</option>
+                  <option value="2">Inactive</option>
+                </select>
+              </div>
             </div>
             <div class="box-footer">
-              
+              <div class="form-group">
+                <button type="button" class="btn btn-default">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
             </div>
+          </form>
           </div>
         </div>
       </div>
@@ -43,4 +67,24 @@
   </div>
   <!-- /.content-wrapper -->
 
+  
+
 <?php require_once "partials/_footer.php"; ?>
+
+
+<!-- create brand modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        
+      </div>
+      
+        
+        
+      </form>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

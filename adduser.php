@@ -1,5 +1,19 @@
+<?php $mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms'); ?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
+<?php
+if(isset($_POST['submit']))
+{
+  $name = $_POST['store_name'];
+  $active = $_POST['active'];
+  $sql = "INSERT INTO stores(name,active) VALUES('$name','$active')";
+  $res = $mysqli->query($sql);
+  if($mysqli->affected_rows){
+    $msg = "Added successfully";
+  }
+}
+
+?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -35,14 +49,27 @@
                   <label for="groups">Groups</label>
                   <select class="form-control" id="groups" name="groups">
                     <option value="" hidden>Select Groups</option>
-                    <option value="5">Staff</option>
-                    <option value="4">Members</option>
+
+                    <?php $sql = "SELECT * FROM groups";
+                    $result = $mysqli->query($sql);
+                    while($row = $result->fetch_assoc()){ ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['group_name']; ?></option>
+
+                    <?php }?>
+                    
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="store">Store</label>
                   <select name="store" id="store" class="form-control">
                     <option value="" hidden>Select One</option>
+
+                    <?php $sql = "SELECT * FROM stores";
+                    $result = $mysqli->query($sql);
+                    while($row = $result->fetch_assoc()){ ?>
+                    <option value="<?php echo $row['active']; ?>"><?php echo $row['name']; ?></option>
+                    <?php }?>
+
                   </select>
                 </div>
                 <div class="form-group">
