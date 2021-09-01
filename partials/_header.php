@@ -1,4 +1,10 @@
 <?php
+session_start();
+if($_SESSION['IS_LOGIN']==null)
+{
+  header('location:login.php');
+}
+$mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms') or die('error');
 // session_start();
 // require_once 'partials/database.inc.php';
 // require_once 'partials/function.php';
@@ -19,11 +25,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- datatables -->
+  <link rel="stylesheet" href="node_modules/datatables.net-bs/css/dataTables.bootstrap.css">
   <link rel="stylesheet" href="node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" href="node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css">
   <link rel="stylesheet" href="node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css">
@@ -41,6 +49,8 @@
   <link rel="stylesheet" href="node_modules/select2/dist/css/select2.min.css">
   <!-- BS Stepper -->
   <link rel="stylesheet" href="node_modules/bs-stepper/dist/css/bs-stepper.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap-fileinput/css/fileinput.css">
+  <link rel="stylesheet" href="node_modules/bootstrap-fileinput/css/fileinput-rtl.min.css">
 </head>
 <body class="layout-fixed control-sidebar-slide-open text-sm layout-footer-fixed">
 <div class="wrapper">

@@ -1,5 +1,10 @@
-<?php
-session_start();
+<?php $mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms') or die('error');
+
+if(isset($_SESSION['IS_LOGIN']))
+{
+  header('location:index.php');
+}
+
 require_once 'partials/function.php';
 $msg = '';
 if(isset($_POST['submit']))
@@ -9,12 +14,12 @@ if(isset($_POST['submit']))
   $query = "SELECT * FROM users WHERE email='$email' AND password = '$password'";
   $res = $mysqli->query($query);
   if ($res->num_rows>0) {
-    $_SESSION['IS_LOGIN']='yes';
-    header('index.php');
+    session_start();
+    $_SESSION['IS_LOGIN'] = $email;
+    header('location:index.php');
   } else {
     $msg =  "<span class='mb-1 bg-danger p-1'>incorrect email/password</span>"; 
   }
-
 }
 ?>
 

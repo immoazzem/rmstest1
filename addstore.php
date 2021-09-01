@@ -1,7 +1,7 @@
-<?php $mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms'); ?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
 <?php
+  $msg = '';
   if(isset($_POST['submit']))
   {
     $name = $_POST['store_name'];

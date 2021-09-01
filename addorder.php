@@ -31,25 +31,26 @@
           <form role="form" action="" method="post" class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="gross_amount" class="col-sm-12 control-label">Date: <?php echo date('Y-m-d') ?></label>
+                  <label for="gross_amount" class="col-sm-12 control-label text-right">Date: <?php echo date('Y-m-d') ?></label>
                 </div>
                 <div class="form-group">
-                  <label for="gross_amount" class="col-sm-12 control-label">Date: <?php echo date('h:i a') ?></label>
+                  <label for="gross_amount" class="col-sm-12 control-label text-right">Date: <?php echo date('h:i a') ?></label>
                 </div>
-                <div class="col-md-4 col-xs-12 pull pull-left">
+                <div class="col-md-4 col-xs-12">
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Table</label>
                     <div class="col-sm-7">
                       <select class="form-control" id="table_name" name="table_name">
-                        <?php foreach ($table_data as $key => $value): ?>
-                          <option value="<?php echo $value['id'] ?>"><?php echo $value['table_name'] ?></option>  
-                        <?php endforeach ?>
+                        <?php 
+                          $sql = "SELECT * FROM tables";
+                          $res = $mysqli->query($sql);
+                          while($row = $res->fetch_assoc()){ ?>
+                          <option value="<?php echo $row['id'] ?>"><?php echo $row['table_name'] ?></option>
+                          <?php }?> 
                       </select>
                     </div>
                   </div>
                 </div>
-                
-                
                 <br /> <br/>
                 <table class="table table-bordered" id="product_info_table">
                   <thead>
@@ -61,35 +62,35 @@
                       <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
                     </tr>
                   </thead>
-
-                   <tbody>
-                     <tr id="row_1">
-                       <td>
+                  <tbody>
+                    <tr id="row_1">
+                      <td>
                         <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" onchange="getProductData(1)" required>
-                            <option value=""></option>
-                            <?php foreach ($products as $k => $v): ?>
-                              <option value="<?php echo $v['id'] ?>"><?php echo $v['name'] ?></option>
-                            <?php endforeach ?>
+                            <option value="" hidden>Select Product</option>
+                            <?php
+                              $pdsql = "SELECT * FROM products";
+                              $res = $mysqli->query($pdsql);
+                              while($pdrow = $res->fetch_assoc()){ ?>
+                              <option value="<?php echo $pdrow['id'] ?>"><?php echo $pdrow['name'] ?></option>
+                            <?php } ?>
                           </select>
-                        </td>
-                        <td><input type="text" name="qty[]" id="qty_1" class="form-control" required onkeyup="getTotal(1)"></td>
-                        <td>
-                          <input type="text" name="rate[]" id="rate_1" class="form-control" disabled autocomplete="off">
+                      </td>
+                      <td><input type="text" name="qty[]" id="qty_1" class="form-control" required onkeyup="getTotal(1)"></td>
+                      <td>
+                          <input type="text" name="rate" id="rate_1" class="form-control" value="<?php ?>" disabled autocomplete="off">
                           <input type="hidden" name="rate_value[]" id="rate_value_1" class="form-control" autocomplete="off">
-                        </td>
-                        <td>
+                      </td>
+                      <td>
                           <input type="text" name="amount[]" id="amount_1" class="form-control" disabled autocomplete="off">
                           <input type="hidden" name="amount_value[]" id="amount_value_1" class="form-control" autocomplete="off">
-                        </td>
-                        <td><button type="button" class="btn btn-default" onclick="removeRow('1')"><i class="fa fa-close"></i></button></td>
+                      </td>
+                      <td><button type="button" class="btn btn-default" onclick="removeRow('1')"><i class="fa fa-close"></i></button></td>
                      </tr>
                    </tbody>
                 </table>
-
                 <br /> <br/>
 
-                <div class="col-md-6 col-xs-12 pull pull-right">
-
+                <div class="col-md-6 col-xs-12">
                   <div class="form-group">
                     <label for="gross_amount" class="col-sm-5 control-label">Gross Amount</label>
                     <div class="col-sm-7">
@@ -97,31 +98,27 @@
                       <input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" autocomplete="off">
                     </div>
                   </div>
-                  <?php if($is_service_enabled == true): ?>
                   <div class="form-group">
-                    <label for="service_charge" class="col-sm-5 control-label">S-Charge <?php echo $company_data['service_charge_value'] ?> %</label>
+                    <label for="service_charge" class="col-sm-5 control-label">S-Charge <?php ?> %</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="service_charge" name="service_charge" disabled autocomplete="off">
                       <input type="hidden" class="form-control" id="service_charge_value" name="service_charge_value" autocomplete="off">
                     </div>
                   </div>
-                  <?php endif; ?>
-                  <?php if($is_vat_enabled == true): ?>
                   <div class="form-group">
-                    <label for="vat_charge" class="col-sm-5 control-label">Vat <?php echo $company_data['vat_charge_value'] ?> %</label>
+                    <label for="vat_charge" class="col-sm-5 control-label">Vat <?php ?> %</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="vat_charge" name="vat_charge" disabled autocomplete="off">
                       <input type="hidden" class="form-control" id="vat_charge_value" name="vat_charge_value" autocomplete="off">
                     </div>
                   </div>
-                  <?php endif; ?>
                   <div class="form-group">
                     <label for="discount" class="col-sm-5 control-label">Discount</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="discount" name="discount" placeholder="Discount" onkeyup="subAmount()" autocomplete="off">
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group ">
                     <label for="net_amount" class="col-sm-5 control-label">Net Amount</label>
                     <div class="col-sm-7">
                       <input type="text" class="form-control" id="net_amount" name="net_amount" disabled autocomplete="off">
@@ -134,10 +131,10 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <input type="hidden" name="service_charge_rate" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
-                <input type="hidden" name="vat_charge_rate" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
+                <input type="hidden" name="service_charge_rate" value="<?php ?>" autocomplete="off">
+                <input type="hidden" name="vat_charge_rate" value="<?php ?>" autocomplete="off">
                 <button type="submit" class="btn btn-primary">Create Order</button>
-                <a href="<?php echo base_url('orders/') ?>" class="btn btn-warning">Back</a>
+                <a href="<?php ?>" class="btn btn-warning">Back</a>
               </div>
             </form>
           <!-- /.box-body -->

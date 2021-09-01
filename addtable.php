@@ -1,5 +1,29 @@
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
+<?php
+  $msg = '';
+  if(isset($_POST['submit']))
+  {
+    $table_name = $_POST['table_name'];
+    $capacity = $_POST['capacity'];
+    $active = $_POST['active'];
+    $available = '';
+    if($_POST['active'] == 1){
+      $available = 2;
+    } else {
+      $available = 1;
+    }
+    
+    $store_id = $_POST['store'];
+    $sql = "INSERT INTO tables(table_name,capacity,available,active,store_id) VALUES('$table_name','$capacity','$available', '$active','$store_id')";
+    $res = $mysqli->query($sql);
+    if($mysqli->affected_rows){
+      $msg = "<span class='alert alert-success alert-dismissible'>Added successfully</span>";
+    } else {
+      $msg = "error";
+    }
+  }
+?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -29,6 +53,7 @@
               <div class="box-header">
                 <h5 class="box-title">Add Table</h5>
               </div>
+              <div><?php echo $msg;?></div>
             <form role="form" action="" method="post" id="createForm">
               <div class="box-body">
                 <div class="form-group">
@@ -49,14 +74,18 @@
                 <div class="form-group">
                   <label for="active">Store</label>
                   <select class="form-control" id="store" name="store">
-                    <option value="1">NK</option>
-                    <option value="2">Barishal</option>
+                    <option value="" hidden>Select One</option>
+                    <?php $sql = "SELECT * FROM stores";
+                    $result = $mysqli->query($sql);
+                    while($row = $result->fetch_assoc()){ ?>
+                    <option value="<?php echo $row['id']?>"><?php echo $row['name']?></option>
+                    <?php } ?>
                   </select>
                 </div>
               </div>
               <div class="box-footer">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="submit" name="submit" class="btn btn-primary">Save</button>
                   <button type="reset" class="btn btn-warning">Reset</button>
                 </div>
               </div>

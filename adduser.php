@@ -1,15 +1,22 @@
-<?php $mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms'); ?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
 <?php
+$msg = '';
 if(isset($_POST['submit']))
 {
-  $name = $_POST['store_name'];
-  $active = $_POST['active'];
-  $sql = "INSERT INTO stores(name,active) VALUES('$name','$active')";
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $email = $_POST['email'];
+  $firstname = $_POST['fname'];
+  $lastname = $_POST['lname'];
+  $phone = $_POST['phone'];
+  $gender = $_POST['gender'];
+  $sql = "INSERT INTO users(username,password,email,fname,lname,phone,gender) VALUES('$username','$password','$email','$firstname','$lastname','$phone','$gender')";
   $res = $mysqli->query($sql);
   if($mysqli->affected_rows){
-    $msg = "Added successfully";
+    $msg = "<div class='alert alert-success alert-dismissible' id='alertMsg' role='alert'>
+    Successfully created
+  </div>";
   }
 }
 
@@ -39,6 +46,9 @@ if(isset($_POST['submit']))
     <div class="content">
       <div class="row">
         <div class="col-md-12 col-xs-12">
+          <div>
+            <?php echo $msg; ?>
+          </div>
           <div class="box">
             <div class="box-header">
               <h5 class="box-title">Add User</h5>

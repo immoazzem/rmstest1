@@ -24,6 +24,7 @@
 <script src="node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
 <script src="node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
 <script src="node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <!-- Select2 -->
 <script src="node_modules/select2/dist/js/select2.min.js"></script>
 <!-- codemirror -->
@@ -48,5 +49,6 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<script src="node_modules/bootstrap-fileinput/js/fileinput.min.js"></script>
 </body>
 </html>

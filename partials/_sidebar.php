@@ -208,7 +208,7 @@
                 </a>
               </li>
               <li class="nav-item" id="manageGroupSubMenu">
-                <a href="managroups.php" class="nav-link">
+                <a href="managegroups.php" class="nav-link">
                   <i class="fas fa-tasks nav-icon"></i>
                   <p>Manage Groups</p>
                 </a>

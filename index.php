@@ -1,6 +1,8 @@
-<?php $mysqli = new mysqli("localhost","root","", "wdpf47_rms") or die("Connection error")?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
+<?php
+
+?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

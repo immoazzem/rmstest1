@@ -1,15 +1,18 @@
-<?php require_once 'partials/function.php';?>
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
 <?php
-$objAdminDb = new AdminDb;
-if(isset($_POST['submit']))
-{
-  $objAdminDb->add_cat($_POST);
-}
+  $msg = '';
+  if(isset($_POST['submit']))
+  {
+    $name = $_POST['category_name'];
+    $active = $_POST['active'];
+    $sql = "INSERT INTO category(name,active) VALUES('$name','$active')";
+    $res = $mysqli->query($sql);
+    if($mysqli->affected_rows){
+      $msg = "<span class='bg-success'>Added successfully</span>";
+    }
+  }
 ?>
-
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -38,6 +41,7 @@ if(isset($_POST['submit']))
             <div class="box-header">
               <h4 class="modal-title">Add Category</h4>
             </div>
+            <div><?php echo $msg; ?></div>
           <form role="form" action="" method="post" id="createForm">
             <div class="box-body">
               <div class="form-group">
@@ -54,8 +58,8 @@ if(isset($_POST['submit']))
             </div>
             <div class="box-footer">
               <div class="form-group">
-                <button type="button" class="btn btn-default">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="reset" name="reset" class="btn btn-default">Reset</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </form>
