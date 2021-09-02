@@ -11,15 +11,16 @@ if(isset($_POST['submit']))
   $lastname = $_POST['lname'];
   $phone = $_POST['phone'];
   $gender = $_POST['gender'];
-  $sql = "INSERT INTO users(username,password,email,fname,lname,phone,gender) VALUES('$username','$password','$email','$firstname','$lastname','$phone','$gender')";
+  $store = $_POST['store'];
+  $group = $_POST['groups'];
+  $sql = "INSERT INTO users(username,password,email,fname,lname,phone,gender,store_id, group_id) VALUES('$username','$password','$email','$firstname','$lastname','$phone','$gender', '$store', '$group')";
   $res = $mysqli->query($sql);
-  if($mysqli->affected_rows){
+  if($mysqli->affected_rows>0){
     $msg = "<div class='alert alert-success alert-dismissible' id='alertMsg' role='alert'>
     Successfully created
   </div>";
   }
 }
-
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -64,10 +65,9 @@ if(isset($_POST['submit']))
                     $result = $mysqli->query($sql);
                     while($row = $result->fetch_assoc()){ ?>
                     <option value="<?php echo $row['id']; ?>"><?php echo $row['group_name']; ?></option>
-
                     <?php }?>
-                    
                   </select>
+                  
                 </div>
                 <div class="form-group">
                   <label for="store">Store</label>
@@ -77,7 +77,7 @@ if(isset($_POST['submit']))
                     <?php $sql = "SELECT * FROM stores";
                     $result = $mysqli->query($sql);
                     while($row = $result->fetch_assoc()){ ?>
-                    <option value="<?php echo $row['active']; ?>"><?php echo $row['name']; ?></option>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                     <?php }?>
 
                   </select>
@@ -126,7 +126,7 @@ if(isset($_POST['submit']))
               </div>
               <div class="box-footer">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="submit" name="submit" class="btn btn-primary">Save</button>
                   <button type="reset" class="btn btn-warning">Reset</button>
                 </div>
               </div>
@@ -139,7 +139,10 @@ if(isset($_POST['submit']))
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <script>
+  
+
+<?php require_once "partials/_footer.php"; ?>
+<script>
     $(document).ready(function() {
       $("#groups").select2();
 
@@ -148,5 +151,3 @@ if(isset($_POST['submit']))
       
     });
   </script>
-
-<?php require_once "partials/_footer.php"; ?>

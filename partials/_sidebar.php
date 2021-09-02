@@ -215,6 +215,12 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item" id="profileMainMenu">
+            <a href="storeinfo.php" class="nav-link">
+            <i class="fas fa-id-badge nav-icon"></i>
+              <p>Store Info</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="logout.php" class="nav-link">
               <i class="fas fa-sign-out-alt nav-icon"></i>

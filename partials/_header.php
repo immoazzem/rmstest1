@@ -12,6 +12,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms') or die('error');
 // {
 //   header('location:login.php');
 // }
+
 ?>
 
 <!DOCTYPE html>
