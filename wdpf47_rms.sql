@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2021 at 06:45 PM
+-- Generation Time: Sep 04, 2021 at 08:13 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -33,6 +33,20 @@ CREATE TABLE `category` (
   `active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `active`) VALUES
+(1, 'Burger', 1),
+(2, 'Pasta', 1),
+(3, 'Sandwich', 2),
+(4, 'Rice', 1),
+(5, 'Biriyani', 1),
+(6, 'Drinks', 1),
+(7, 'Snacks', 1),
+(8, 'Biriyani', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -44,6 +58,16 @@ CREATE TABLE `groups` (
   `group_name` varchar(64) NOT NULL,
   `permission` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`id`, `group_name`, `permission`) VALUES
+(1, 'Admin', ''),
+(2, 'Staff', ''),
+(3, 'Cashier', ''),
+(4, 'Member', '');
 
 -- --------------------------------------------------------
 
@@ -102,6 +126,16 @@ CREATE TABLE `products` (
   `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `category_id`, `store_id`, `name`, `price`, `description`, `image`, `active`, `created`) VALUES
+(4, '1', '3', 'Burger With Fries', '280', 'Big Size Burger With French Fries for Single Person', 'Burger-with-fries-1024x536.png', 1, '2021-09-01 08:05:26'),
+(5, '1', '2', 'Jumbo Burger', '210', 'Big XL Size burger', 'iStock-1248291191-638x425.jpg', 1, '2021-09-04 17:46:43'),
+(6, '1', '2', 'Mini Burger', '170', 'Mini Burger Smaill in size', 'photo-1571091718767-18b5b1457add.jpg', 1, '2021-09-04 18:04:31'),
+(7, '5', '13', 'Beef Biriyani', '320', 'Beef Biriyani', 'biriyani.jpg', 1, '2021-09-04 18:09:50');
+
 -- --------------------------------------------------------
 
 --
@@ -120,6 +154,13 @@ CREATE TABLE `restaurant_info` (
   `currency` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `restaurant_info`
+--
+
+INSERT INTO `restaurant_info` (`id`, `restaurant_name`, `address`, `email`, `phone`, `country`, `service_charge_value`, `vat_charge_value`, `currency`) VALUES
+(1, 'Belmont Restaurant', 'Banani, Dhaka', '', '01674729903', 'Bangladesh', '', '5', 'BDT');
+
 -- --------------------------------------------------------
 
 --
@@ -137,7 +178,14 @@ CREATE TABLE `stores` (
 --
 
 INSERT INTO `stores` (`id`, `name`, `active`) VALUES
-(1, 'A', 1);
+(2, 'Mirpur-2', 1),
+(3, 'Dhammondi-7', 1),
+(7, 'Basabo', 1),
+(9, 'Tajmahal Road', 1),
+(10, 'Uttara-3', 1),
+(11, 'Uttara-7', 1),
+(12, 'Meghna', 1),
+(13, 'Banani', 1);
 
 -- --------------------------------------------------------
 
@@ -149,10 +197,29 @@ CREATE TABLE `tables` (
   `id` int(11) NOT NULL,
   `table_name` varchar(255) NOT NULL,
   `capacity` varchar(255) NOT NULL,
-  `available` int(11) NOT NULL,
+  `available` int(11) DEFAULT NULL,
   `active` int(11) NOT NULL,
   `store_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tables`
+--
+
+INSERT INTO `tables` (`id`, `table_name`, `capacity`, `available`, `active`, `store_id`) VALUES
+(1, 'East1', '2', 2, 1, 2),
+(2, 'West', '4', 2, 1, 7),
+(3, 'konae table', '4', 2, 1, 2),
+(4, 'North C-1', '4', 2, 1, 2),
+(5, 'EAST C2', '2', 2, 1, 11),
+(6, 'WEST', '2', 1, 2, 3),
+(7, 'East C-2', '2', 2, 1, 2),
+(8, 'asdsa', '2', 2, 1, 3),
+(9, 'sad', '3', 1, 1, 7),
+(10, 'U1', '6', 1, 1, 11),
+(11, 'North C1', '6', 2, 1, 2),
+(12, 'WEST C5', '6', 2, 1, 2),
+(13, 'North E3', '2', 2, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -169,17 +236,18 @@ CREATE TABLE `users` (
   `lastname` varchar(64) NOT NULL,
   `phone` varchar(64) NOT NULL,
   `gender` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL
+  `store_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `firstname`, `lastname`, `phone`, `gender`, `store_id`) VALUES
-(1, 'admin', 'password', 'admin@mail.com', 'Nam', 'Nai', '096887799900', 1, 0),
-(2, 'abusayed', 'password', 'abusayed@mail.com', 'Abu', 'Sayed', '096887799901', 1, 0),
-(3, 'alamin', 'password', 'alamin@mail.com', 'Al', 'Amin', '096887799902', 1, 0);
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `firstname`, `lastname`, `phone`, `gender`, `store_id`, `group_id`) VALUES
+(1, 'admin', 'password', 'admin@mail.com', 'Nam', 'Nai', '096887799900', 1, 0, 0),
+(2, 'abusayed', 'password', 'abusayed@mail.com', 'Abu', 'Sayed', '096887799901', 1, 0, 0),
+(3, 'alamin', 'password', 'alamin@mail.com', 'Al', 'Amin', '096887799902', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -265,13 +333,13 @@ ALTER TABLE `user_group`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -289,25 +357,25 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `restaurant_info`
 --
 ALTER TABLE `restaurant_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `stores`
 --
 ALTER TABLE `stores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tables`
 --
 ALTER TABLE `tables`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
