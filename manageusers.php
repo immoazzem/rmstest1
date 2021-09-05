@@ -60,7 +60,7 @@
                           <td><?php echo $row['firstname'].' '.$row['lastname']?></td>
                           <td><?php echo $row['phone']?></td>
                           <td></td>
-                          <td><a href="http://localhost:/restaurant/users/edit/6" class="btn btn-default"><i class="fas fa-edit"></i></a><a href="http://localhost:/restaurant/users/delete/6" class="btn btn-default"><i class="fa fa-trash"></i></a>
+                          <td><a href="edituser.php?id=<?php echo $row['id']?>" class="btn btn-default"><i class="fas fa-edit"></i></a><a href="deleteuser.php?id=<?php echo $row['id']?>" class="btn btn-default"><i class="fa fa-trash"></i></a>
                           </td>
                         </tr>
                         <?php } ?>

@@ -73,8 +73,12 @@
                                             echo "<span class='btn bg-success'>Active</span>";
                                           } else {
                                             echo "<span class='btn btn-danger'>Inactive</span>";
-                                          } ?></td>
-                                        <td><a href="editproduct.php?id=<?php echo $row['id']?>" class="btn btn-default" onclick=""><i class="fas fa-edit"></i></a> <a href="deleteproduct.php?id=<?php echo $row['id']?>" class="btn btn-default" onclick=""><i class="fa fa-trash"></i></a></td>
+                                          } ?>
+                                          </td>
+                                        <td><a href="editproduct.php?id=<?php echo $row['id']?>" class="btn btn-default"><i class="fas fa-edit"></i></a>
+                                        
+                                        <a href="deleteproduct.php?id=<?php echo $row['id']?>" class="btn btn-default"><i class="fa fa-trash"></i></a>
+                                      </td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>

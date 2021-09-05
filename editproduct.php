@@ -3,7 +3,7 @@
 <?php
 $msg='';
 $id = $_REQUEST['id'];
-$sql = "SELECT * FROM tables WHERE id = '$id'";
+$sql = "SELECT * FROM products WHERE id = '$id'";
 $res = $mysqli->query($sql);
 $row = $res->fetch_assoc();
 
@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $product_image_ext = pathinfo($product_image_name, PATHINFO_EXTENSION);
   if($product_image_ext == 'jpg' || $product_image_ext == 'png' || $product_image_ext == 'jpeg'){
     if($product_image_size<=1e+6){
-      $sql = "INSERT INTO `products` (`category_id`, `store_id`, `name`, `price`, `description`, `image`, `active`) VALUES ('$category_id', '$store_id', '$product_name', '$price', '$description', '$product_image_name', '$active')";
+      $sql = "UPDATE `products` SET `category_id` = '$category_id', `store_id` = '$store_id', `name` = '$product_name', `price` = '$price', `description` = '$description', `image` = '$product_image_name', `active` = '$active' WHERE id = '$id'";
 
       if($mysqli->query($sql)){
         move_uploaded_file($product_image_tmp,"dist/img/".$product_image_name);
@@ -62,9 +62,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       <div class="box">
         <div class="row">
           <div class="col-md-12 col-xs-12">
-
+              <br>
             <div id="messages"><?php echo $msg; ?></div>
-
+            <br><br>
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Edit Product</h3>
@@ -84,17 +84,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                     <div class="form-group">
                       <label for="product_name">Product name</label>
-                      <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product name" autocomplete="off" value="" />
+                      <input type="text" class="form-control" id="product_name" name="product_name" value="<?php if(isset($_POST['product_name'])){ echo $_POST['product_name']; } else { echo $row['name']; } ?>" autocomplete="off" />
                     </div>
 
                     <div class="form-group">
                       <label for="price">Price</label>
-                      <input type="text" class="form-control" id="price" name="price" placeholder="Enter price" autocomplete="off" value=""/>
+                      <input type="text" class="form-control" id="price" name="price" placeholder="Enter price" autocomplete="off" value="<?php if(isset($_POST['price'])){ echo $_POST['price']; } else { echo $row['price']; } ?>"/>
                     </div>
 
                     <div class="form-group">
                       <label for="description">Description</label>
-                      <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter description" autocomplete="off"></textarea>
+                      <textarea type="text" class="form-control" id="description" name="description" value="<?php if(isset($_POST['description'])){ echo $_POST['description']; } else { echo $row['description']; } ?>" autocomplete="off"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -103,26 +103,46 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                       <?php
                         $sql = "SELECT * FROM category";
                         $res = $mysqli->query($sql);
-                        while($row = $res->fetch_assoc()){?>
-                        <option value="<?php echo $row['id']?>"><?php echo $row['name']?></option>
+                        while($crow = $res->fetch_assoc()){?>
+                        <option value="<?php echo $crow['id']?>"><?php echo $crow['name']?></option>
                         <?php }?>
                       </select>
                     </div>
                     <div class="form-group">
                       <label for="store">Store</label>
-                      <select class="js-example-basic-multiple select_group form-control" id="store" name="store">
-                        <?php 
-                        $sql = "SELECT * FROM stores";
-                        $res = $mysqli->query($sql);
-                        while($row = $res->fetch_assoc()){?>s
-                        <option value="<?php echo $row['id']?>"><?php echo $row['name'] ?></option>
+                      <select class="form-control" id="store" name="store">
+                        <?php
+                        $stid = $row['store_id'];
+                        $stquery = "SELECT * FROM stores WHERE id = '$stid'";
+                        $result = $mysqli->query($stquery);
+                        while($srow = $result->fetch_assoc()){?>
+                        <option value="<?php
+                        if(isset($_POST['store'])){ echo $_POST['store']; } else { echo $row['store_id']; }
+                        ?>" selected><?php
+                        if(isset($_POST['store_name'])){ echo $_POST['store_name']; } else { echo $srow['name']; }
+
+
+                        ?></option>
                         <?php }?>
-                      </select>
+
+                      
+                    <option value="" hidden>Select One</option>
+                    <?php $sql = "SELECT * FROM stores";
+                    $result = $mysqli->query($sql);
+                    while($sttrow = $result->fetch_assoc()){ ?>
+                    <option value="<?php echo $sttrow['id']?>"><?php echo $sttrow['name']?></option>
+                    <?php } ?>
+                  </select>
                     </div>
 
                     <div class="form-group">
                       <label for="">Active</label>
                       <select class="select_group form-control" id="active" name="active">
+                          <option value="<?php if(isset($_POST['active'])){ echo $_POST['active']; } else { echo $row['active']; } ?>" selected><?php if($row['active']==1){
+                            echo "<span class='btn bg-success'>Active</span>";
+                          } else {
+                            echo "<span class='btn btn-danger'>Inactive</span>";
+                          } ?></option>
                         <option value="1">Yes</option>
                         <option value="2">No</option>
                       </select>

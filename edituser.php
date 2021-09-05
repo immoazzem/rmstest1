@@ -1,8 +1,16 @@
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
 <?php
+
 $msg = '';
-if(isset($_POST['submit']))
+$id = $_REQUEST['id'];
+
+$sql = "SELECT * FROM users WHERE id ='$id'";
+$result = $mysqli->query($sql);
+$urow = $result->fetch_assoc();
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
   $username = $_POST['username'];
   $password = $_POST['password'];
@@ -13,11 +21,11 @@ if(isset($_POST['submit']))
   $gender = $_POST['gender'];
   $store = $_POST['store'];
   $group = $_POST['groups'];
-  $sql = "INSERT INTO users(username,password,email,firstname,lastname,phone,gender,store_id, group_id) VALUES('$username','$password','$email','$firstname','$lastname','$phone','$gender', '$store', '$group')";
-  $res = $mysqli->query($sql);
+  $sql = "UPDATE users SET username = '$username',password = '$password',email = '$email',firstname = '$firstname',lastname = '$lastname',phone = '$phone',gender = '$gender',store_id = '$store', group_id = '$group'";
+  $mysqli->query($sql);
   if($mysqli->affected_rows>0){
     $msg = "<div class='alert alert-success alert-dismissible' id='alertMsg' role='alert'>
-    Successfully created
+    Successfully Updated
   </div>";
   }
 }
@@ -35,7 +43,7 @@ if(isset($_POST['submit']))
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add User</li>
+              <li class="breadcrumb-item active">Edit User</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -49,12 +57,14 @@ if(isset($_POST['submit']))
         <div class="col-md-12 col-xs-12">
           <br>
           <div>
+              <br>
             <?php echo $msg; ?>
+            <br>
           </div>
           <br>
           <div class="box">
             <div class="box-header">
-              <h5 class="box-title">Add User</h5>
+              <h5 class="box-title">Edit User</h5>
             </div>
             <form role="form" action="" method="post">
               <div class="box-body">
@@ -86,11 +96,13 @@ if(isset($_POST['submit']))
                 </div>
                 <div class="form-group">
                   <label for="username">Username</label>
-                  <input type="text" name="username" class="form-control" id="username" placeholder="username" autocomplete="off">
+                  <input type="text" name="username" class="form-control" id="username" value="<?php if(isset($_POST['username'])){ echo $_POST['username']; } else { echo $urow['username']; } ?>" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" name="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
+                  <input type="email" name="email" class="form-control" id="email" value="
+                  <?php if(isset($_POST['email'])){ echo $_POST['email']; } else { echo $urow['email']; } 
+                  ?>" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
@@ -102,15 +114,15 @@ if(isset($_POST['submit']))
                 </div>
                 <div class="form-group">
                   <label for="fname">First Name</label>
-                  <input type="text" name="fname" class="form-control" id="fname" placeholder="First Name" autocomplete="off">
+                  <input type="text" name="fname" class="form-control" id="fname" value="<?php if(isset($_POST['fname'])){ echo $_POST['fname']; } else { echo $urow['firstname']; } ?>" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="lname">Last Name</label>
-                  <input type="text" name="lname" class="form-control" id="lname" placeholder="Last Name" autocomplete="off">
+                  <input type="text" name="lname" class="form-control" id="lname" value="<?php if(isset($_POST['lname'])){ echo $_POST['lname']; } else { echo $urow['lastname']; } ?>" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="phone">Phone</label>
-                  <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" autocomplete="off">
+                  <input type="text" name="phone" class="form-control" id="phone" value="<?php if(isset($_POST['phone'])){ echo $_POST['phone']; } else { echo $urow['phone']; } ?>" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="gender">Gender</label>
@@ -129,7 +141,7 @@ if(isset($_POST['submit']))
               <div class="box-footer">
                 <div class="form-group">
                   <button type="submit" name="submit" class="btn btn-primary">Save</button>
-                  <button type="reset" class="btn btn-warning">Reset</button>
+                  <a href="manageusers.php" class="btn btn-warning">Back</a>
                 </div>
               </div>
             </form>
