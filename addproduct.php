@@ -57,9 +57,9 @@ if(isset($_POST['submit'])){
       <div class="box">
         <div class="row">
           <div class="col-md-12 col-xs-12">
-
+            <br>
             <div id="messages"><?php echo $msg; ?></div>
-
+            <br>
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Add Product</h3>
