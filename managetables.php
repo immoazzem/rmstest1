@@ -74,7 +74,7 @@
                                         </td>
                                         <!-- <td><span class='label label-warning'>Unavailable</span></td> -->
                                         <!-- <td><span class='label label-success'>Active</span></td> -->
-                                        <td><button type="button" class="btn btn-default" onclick=""><i class="fas fa-edit"></i></button> <button type="button" class="btn btn-default" onclick=""><i class="fa fa-trash"></i></button></td>
+                                        <td><a href="edittable.php?id=<?php echo $row['id']?>" class="btn btn-default" onclick=""><i class="fas fa-edit"></i></a> <a href="deletetable.php?id=<?php echo $row['id']?>" class="btn btn-default" onclick=""><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>

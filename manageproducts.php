@@ -74,7 +74,7 @@
                                           } else {
                                             echo "<span class='btn btn-danger'>Inactive</span>";
                                           } ?></td>
-                                        <td><button type="button" class="btn btn-default" onclick=""><i class="fas fa-edit"></i></button> <button type="button" class="btn btn-default" onclick=""><i class="fa fa-trash"></i></button></td>
+                                        <td><a href="editproduct.php?id=<?php echo $row['id']?>" class="btn btn-default" onclick=""><i class="fas fa-edit"></i></a> <a href="deleteproduct.php?id=<?php echo $row['id']?>" class="btn btn-default" onclick=""><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>
