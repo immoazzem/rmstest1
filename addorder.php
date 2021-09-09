@@ -2,10 +2,23 @@
   require_once "partials/_sidebar.php";
   date_default_timezone_set('Asia/Dhaka'); ?>
   <?php
-  $id = '';
-  if(isset($_POST['product'])){
-    $id = $_POST['product'];
-  }
+  // $id = '';
+  // if(isset($_POST['product'])){
+  //   $id = $_POST['product'];
+  // }
+
+    $product='';
+    $sql = "SELECT * FROM products";
+    $result = $mysqli->query($sql);
+    foreach ($result as $row){
+      $product .= "<option value=".$row['id'].">" .$row['name']."</option>";
+    }
+    $table = '';
+    $sql = "SELECT * FROM tables";
+    $result = $mysqli->query($sql);
+    foreach ($result as $row){
+      $table .= "<option value=".$row['id'].">" .$row['table_name']."</option>";
+    }
   
 
   ?>
@@ -53,7 +66,7 @@
                     <label for="gross_amount" class="col-sm-5 control-label" style="text-align:left;">Table</label>
                     <div class="col-sm-7">
                       <select class="form-control" id="table_name" name="table_name">
-                          <option value="<?php ?>"><?php  ?></option>  
+                        <option value=""></option><?php echo $table; ?>
                       </select>
                     </div>
                   </div>
@@ -73,20 +86,8 @@
                       <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
                     </tr>
                   </thead>
-
                    <tbody>
-                     <tr id="row_">
-                       <td>
-                        <select class="form-control select_group product" data-row-id="row_1" id="product_" name="product[]" style="width:100%;" required>
-                            <option value=""></option>
-                          </select>
-                        </td>
-                        <td><input type="text" name="qty[]" id="qty_" class="form-control" required></td>
-                        <td><input type="text" name="rate[]" id="rate_" class="form-control" autocomplete="off"></td>
-                        <td><input type="text" name="vat[]" id="vat_" class="form-control" autocomplete="off"></td>
-                        <td><input type="text" name="amount[]" id="amount_" class="form-control" disabled autocomplete="off"></td>
-                        <td><button type="button" class="btn btn-default"><i class="far fa-window-close"></i></button></td>
-                     </tr>
+                     
                    </tbody>
                 </table>
               </div>
@@ -106,15 +107,61 @@
 <?php require_once "partials/_footer.php"; ?>
 <script>
   $(document).ready(function(){
-    var i = 1;
+    var i = 0;
     $("#add_row").click(function(){
       i++;
-      $("#product_info_table").append('<tr id="row_'+i+'"><td><select class="form-control select_group product" data-row-id="row_'+i+'" id="product_'+i+'" name="product[]" style="width:100%;" required><option value=""></option></select></td><td><input type="text" name="qty[]" id="qty_'+i+'" class="form-control" required></td><td><input type="text" name="rate[]" id="rate_'+i+'" class="form-control" autocomplete="off"></td><td><input type="text" name="vat[]" id="vat_'+i+'" class="form-control" autocomplete="off"></td><td><input type="text" name="amount[]" id="amount_'+i+'" class="form-control" disabled autocomplete="off"></td><td><button name="remove" id="'+i+'" type="button" class="btn btn-default btn_remove"><i class="far fa-window-close"></i></button></td></tr>');
+
+      var html = "";
+
+      html += '<tr>';
+
+      html += '<td><select class="form-control select_group product" id="product_'+i+'" name="product[]" style="width:100%;" data-product-id='+i+' required><option value="">Select One</option><?php echo $product ?></select></td>';
+
+      html += '<td><input type="text" name="qty[]" id="qty_'+i+'" class="form-control" required></td>';
+
+      html += '<td><input type="text" name="rate[]" id="rate'+i+'" data-product-price='+i+' class="form-control" autocomplete="off"></td>';
+
+      html += '<td><input type="text" name="vat[]" id="vat_'+i+'" class="form-control product_price" autocomplete="off"></td>';
+
+      html += '<td><input type="text" name="amount[]" id="amount_'+i+'" class="form-control" disabled autocomplete="off"></td>';
+
+      html += '<td><button name="remove" id="'+i+'" type="button" class="btn btn-default btn_remove"><i class="far fa-window-close"></i></button></td>';
+
+      html += '</tr>';
+
+      html += '';
+
+      $('tbody').append(html);
+      
+      $(document).on('click', '.btn_remove', function() {
+          $(this).closest('tr').remove();
+      }); 
+    });
+
+
+    $(document).on("change", ".product", function(){
+
+      var product_id = $(this).val();
+
+      if(product_id != '' ){
+
+        var price_id = $(this).data('product-id');
+        $('#rate' + price_id).text('250');
+
+        $.ajax({
+          url: "orderaction.php",
+          method: "POST",
+          data: {
+                  action:'load_price',
+                  pid = product_id
+                },
+          success: function(data){
+            var price = data;
+            $('#rate' + price_id).html(price);
+          }
+        })
+      }
     })
-    $(document).on('click', '.btn_remove', function(){
-      var button_id = $(this).attr("id");
-      $('#row_'+button_id+'').remove();
-    })
+
   });
 </script>
-

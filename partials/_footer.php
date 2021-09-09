@@ -10,7 +10,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/jquery/dist/jquery-3.6.0.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -21,9 +21,9 @@
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- datatables -->
 <script src="node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-<script src="node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-<script src="node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<!-- <script src="node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script> -->
+<!-- <script src="node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script> -->
+<!-- <script src="node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script> -->
 <script src="node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <!-- Select2 -->
 <script src="node_modules/select2/dist/js/select2.min.js"></script>
@@ -40,9 +40,9 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="node_modules/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="node_modules/summernote/dist/summernote-bs4.min.js"></script>
+<!-- <script src="node_modules/summernote/dist/summernote-bs4.min.js"></script> -->
 <!-- overlayScrollbars -->
-<script src="node_modules/overlayscrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- <script src="node_modules/overlayscrollbars/js/jquery.overlayScrollbars.min.js"></script> -->
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->

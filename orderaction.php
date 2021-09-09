@@ -1,7 +1,13 @@
 <?php
 $mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms') or die('error');
 
-$totalPrice = 0;
+$id = $_GET['pid'];
+
+    $sql = "SELECT * FROM products WHERE id = '$id'";
+    $result = $mysqli->query($sql);
+    while($row = $result->fetch_assoc()){
+        echo $row['price'];
+    }
 
 
 ?>
