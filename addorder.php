@@ -19,6 +19,14 @@
     foreach ($result as $row){
       $table .= "<option value=".$row['id'].">" .$row['table_name']."</option>";
     }
+
+    $vat= '';
+    $sql = "SELECT * FROM restaurant_info";
+    $result = $mysqli->query($sql);
+    foreach ($result as $row){
+      $vat .= $row['vat_charge_value'];
+    }
+
   
 
   ?>
@@ -53,11 +61,11 @@
           <!-- /.box-header -->
           <form role="form" action="" method="post" class="form-horizontal">
               <div class="box-body">
-                <div class="form-group">
-                  <label for="gross_amount" class="col-sm-12 control-label">Date: <?php echo date('Y-m-d') ?></label>
+                <div class="form-group d-flex justify-content-end">
+                  <label for="gross_amount" class="col-sm-12 control-label d-flex justify-content-end">Date: <?php echo date('Y-m-d') ?></label>
                 </div>
                 <div class="form-group">
-                  <label for="gross_amount" class="col-sm-12 control-label">Date: <?php echo date('h:i a') ?></label>
+                  <label for="gross_amount" class="col-sm-12 control-label d-flex justify-content-end">Date: <?php echo date('h:i a') ?></label>
                 </div>
 
                 <div class="col-md-4 col-xs-12 pull pull-left">
@@ -81,7 +89,6 @@
                       <th style="width:50%">Product</th>
                       <th style="width:10%">Qty</th>
                       <th style="width:10%">Rate</th>
-                      <th style="width:10%">Vat</th>
                       <th style="width:20%">Amount</th>
                       <th style="width:10%"><button type="button" id="add_row" class="btn btn-default"><i class="fa fa-plus"></i></button></th>
                     </tr>
@@ -89,7 +96,35 @@
                    <tbody>
                      
                    </tbody>
+                   <tfoot>
+                   <tr>
+                      <td></td>
+                      <td></td>
+                      <th>Gross Amount</th>
+                      <td><input type="text" class="form-control" value="" id="gross_amount" name="gross_amount" disabled><input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" autocomplete="off"></td>
+                      <td></td>
+                      
+                      
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <th style="width:10%">Vat <?php echo $vat ;?> %</th>
+                      <td><input type="text" class="form-control" id="vat_charge" name="vat_charge" disabled></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <th style="width:10%">Net Amount</th>
+                      <td><input type="text" class="form-control" id="net_amount" name="net_amount" disabled></td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
                 </table>
+                <div class="form-group">
+
+                </div>
               </div>
               <!-- /.box-body -->
 
@@ -107,23 +142,23 @@
 <?php require_once "partials/_footer.php"; ?>
 <script>
   $(document).ready(function(){
+    
     var i = 0;
+
     $("#add_row").click(function(){
       i++;
 
       var html = "";
 
-      html += '<tr>';
+      html += '<tr id="row_'+i+'">';
 
       html += '<td><select class="form-control select_group product" id="product_'+i+'" name="product[]" style="width:100%;" data-product-id='+i+' required><option value="">Select One</option><?php echo $product ?></select></td>';
 
-      html += '<td><input type="text" name="qty[]" id="qty_'+i+'" class="form-control" required></td>';
+      html += '<td><input type="number" min="1" max="20" value="" name="qty[]" id="qty_'+i+'" class="form-control" keypress="getTotal('+i+')" required></td>';
 
-      html += '<td><input type="text" name="rate[]" id="rate'+i+'" data-product-price='+i+' class="form-control" autocomplete="off"></td>';
+      html += '<td><input type="text" name="rate[]" id="rate_'+i+'" data-product-price='+i+' class="form-control" autocomplete="off"><input type="hidden" name="rate_value[]" id="rate_value_'+i+'" class="form-control"></td>';
 
-      html += '<td><input type="text" name="vat[]" id="vat_'+i+'" class="form-control product_price" autocomplete="off"></td>';
-
-      html += '<td><input type="text" name="amount[]" id="amount_'+i+'" class="form-control" disabled autocomplete="off"></td>';
+      html += '<td><input type="text" name="amount[]" id="amount_'+i+'" class="form-control" disabled autocomplete="off"><input type="hidden" name="amount_value[]" id="amount_value_'+i+'" class="form-control"></td>';
 
       html += '<td><button name="remove" id="'+i+'" type="button" class="btn btn-default btn_remove"><i class="far fa-window-close"></i></button></td>';
 
@@ -146,22 +181,80 @@
       if(product_id != '' ){
 
         var price_id = $(this).data('product-id');
-        $('#rate' + price_id).text('250');
 
         $.ajax({
           url: "orderaction.php",
           method: "POST",
           data: {
                   action:'load_price',
-                  pid = product_id
+                  pid : product_id
                 },
           success: function(data){
             var price = data;
-            $('#rate' + price_id).html(price);
+            $('#rate_' + price_id).val(price);
+            $('#rate_value_' + price_id).val(price);
+            var st = $("#qty_"+ price_id).val(1);
+
+            var total = Number(price) * 1;
+            total = total.toFixed(2);
+            $("#amount_"+price_id).val(total);
+            $("#amount_value_"+price_id).val(total);
+            subAmount();
           }
         })
       }
-    })
+    });
+
+    function getTotal(row = null) {
+      alert("hi");
+      if(row) {
+        var total = Number($("#rate_"+row).val()) * Number($("#qty_"+row).val());
+        total = total.toFixed(2);
+        $("#amount_"+row).val(total);
+        $("#amount_value_"+row).val(total);
+        
+        subAmount();
+    }
+
+    // } else {
+    //   alert('no row !! please refresh the page');
+    // }
+  }
+
+    function subAmount(){
+      var vat_charge = <?php echo ($vat > 0) ? $vat:0; ?>;
+      var tableProductLength = $("#product_info_table tbody tr").length;
+      var totalSubAmount = 0;
+      for(x = 0; x < tableProductLength; x++) {
+      var tr = $("#product_info_table tbody tr")[x];
+      var count = $(tr).attr('id');
+      count = count.substring(4);
+
+      totalSubAmount = Number(totalSubAmount) + Number($("#amount_"+count).val());
+      }
+      totalSubAmount = totalSubAmount.toFixed(2);
+
+      // sub total
+      $("#gross_amount").val(totalSubAmount);
+      $("#gross_amount_value").val(totalSubAmount);
+
+      // vat
+      var vat = (Number($("#gross_amount").val())/100) * vat_charge;
+      vat = vat.toFixed(2);
+      $("#vat_charge").val(vat);
+      $("#vat_charge_value").val(vat);
+      
+      // total amount
+      var totalAmount = (Number(totalSubAmount) + Number(vat));
+      totalAmount = totalAmount.toFixed(2);
+      $("#net_amount").val(totalAmount);
+      // $("#totalAmountValue").val(totalAmount);
+
+    }
+
+
+
+    
 
   });
 </script>

@@ -1,5 +1,11 @@
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
+<?php
+if(isset($_POST[''])){
+  $_POST[''];
+}
+
+?>
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -71,7 +77,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
               </div>
             </form>
           </div>

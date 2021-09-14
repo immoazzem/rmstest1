@@ -1,7 +1,7 @@
 <?php
 $mysqli = new mysqli('localhost', 'root', '', 'wdpf47_rms') or die('error');
 
-$id = $_GET['pid'];
+$id = $_POST['pid'];
 
     $sql = "SELECT * FROM products WHERE id = '$id'";
     $result = $mysqli->query($sql);
