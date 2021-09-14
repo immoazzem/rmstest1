@@ -1,8 +1,26 @@
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
 <?php
-if(isset($_POST[''])){
-  $_POST[''];
+$msg = "";
+if(isset($_POST['submit'])){
+  
+  $company_name = $_POST['company_name'];
+  $service_charge_value = $_POST['service_charge_value'];
+  $vat_charge_value = $_POST['vat_charge_value'];
+  $address = $_POST['address'];
+  $phone = $_POST['phone'];
+  $email = $_POST['email'];
+  $country = $_POST['country'];
+  $currency = $_POST['currency'];
+
+  $sql = "UPDATE restaurant_info
+  SET restaurant_name = '$company_name', City= '$service_charge_value', address = '$address', email = '$email', phone = '$phone', country = '$country', service_charge_value = '$service_charge_value', vat_charge_value = '$vat_charge_value', currency = '$currency'
+  WHERE CustomerID = 1";
+  $mysqli->query($sql);
+  if($mysqli->num_rows){
+    $msg = "<span class='bg-success'>Successfully Updated</span>";
+  }
+
 }
 
 ?>
@@ -36,6 +54,9 @@ if(isset($_POST[''])){
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Manage Store Information</h3>
+              <br>
+              <div><?php echo $msg;?></div>
+              <br>
             </div>
             <form role="form" action="" method="post">
               <div class="box-body">
@@ -64,12 +85,16 @@ if(isset($_POST[''])){
                   <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone" value="<?php echo $row['phone'] ?>" autocomplete="off">
                 </div>
                 <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="email" value="<?php echo $row['email'] ?>" autocomplete="off">
+                </div>
+                <div class="form-group">
                   <label for="country">Country</label>
                   <input type="text" class="form-control" id="country" name="country" placeholder="Enter country" value="<?php echo $row['country'] ?>" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="currency">Currency</label>
-                  <input type="text" class="form-control" id="country" name="country" placeholder="Enter country" value="<?php echo $row['currency'] ?>" autocomplete="off">
+                  <input type="text" class="form-control" id="currency" name="currency" placeholder="Enter currency" value="<?php echo $row['currency'] ?>" autocomplete="off">
                 </div>
                 <?php }?>
                 

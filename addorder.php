@@ -122,9 +122,7 @@
                     </tr>
                   </tfoot>
                 </table>
-                <div class="form-group">
-
-                </div>
+                
               </div>
               <!-- /.box-body -->
 
@@ -154,9 +152,9 @@
 
       html += '<td><select class="form-control select_group product" id="product_'+i+'" name="product[]" style="width:100%;" data-product-id='+i+' required><option value="">Select One</option><?php echo $product ?></select></td>';
 
-      html += '<td><input type="number" min="1" max="20" value="" name="qty[]" id="qty_'+i+'" class="form-control" keypress="getTotal('+i+')" required></td>';
+      html += '<td><input type="number" min="1" max="20" value="" name="qty[]" id="qty_'+i+'" class="form-control quantity" onchange="getTotal('+i+')" required></td>';
 
-      html += '<td><input type="text" name="rate[]" id="rate_'+i+'" data-product-price='+i+' class="form-control" autocomplete="off"><input type="hidden" name="rate_value[]" id="rate_value_'+i+'" class="form-control"></td>';
+      html += '<td><input type="text" name="rate[]" id="rate_'+i+'" data-product-price='+i+' class="form-control pdt_price" autocomplete="off"><input type="hidden" name="rate_value[]" id="rate_value_'+i+'" class="form-control"></td>';
 
       html += '<td><input type="text" name="amount[]" id="amount_'+i+'" class="form-control" disabled autocomplete="off"><input type="hidden" name="amount_value[]" id="amount_value_'+i+'" class="form-control"></td>';
 
@@ -167,6 +165,7 @@
       html += '';
 
       $('tbody').append(html);
+      $('')
       
       $(document).on('click', '.btn_remove', function() {
           $(this).closest('tr').remove();
@@ -199,29 +198,40 @@
             total = total.toFixed(2);
             $("#amount_"+price_id).val(total);
             $("#amount_value_"+price_id).val(total);
+            
             subAmount();
           }
         })
       }
+
     });
 
-    function getTotal(row = null) {
-      alert("hi");
+    
+    
+
+    
+    
+
+  });
+
+  function getTotal(row = null) {
       if(row) {
         var total = Number($("#rate_"+row).val()) * Number($("#qty_"+row).val());
         total = total.toFixed(2);
         $("#amount_"+row).val(total);
         $("#amount_value_"+row).val(total);
         
+        
         subAmount();
+      } else {
+        alert('no row !! please refresh the page');
+      }
     }
 
-    // } else {
-    //   alert('no row !! please refresh the page');
-    // }
-  }
 
-    function subAmount(){
+
+
+  function subAmount(){
       var vat_charge = <?php echo ($vat > 0) ? $vat:0; ?>;
       var tableProductLength = $("#product_info_table tbody tr").length;
       var totalSubAmount = 0;
@@ -253,8 +263,4 @@
     }
 
 
-
-    
-
-  });
 </script>

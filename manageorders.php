@@ -1,5 +1,11 @@
 <?php require_once "partials/_header.php"; ?>
 <?php require_once "partials/_sidebar.php"; ?>
+<?php
+$msg = '<div class="alert alert-success alert-dismissible" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>';
+
+?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -23,11 +29,47 @@
 
     <!-- Main content -->
     <div class="content">
-      <div class="container-fluid">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
 
+        <div id="messages"></div>
+
+          
+
+          <a href="addorder.php" class="btn btn-primary">Add Order</a>
+          <br /> <br />
+
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Manage Orders</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <table id="manageTable" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Bill no</th>
+                <th>Store</th>
+                <th>Date Time</th>
+                <th>Total Products</th>
+                <th>Total Amount</th>
+                <th>Paid status</th>
+              </tr>
+              </thead>
+
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
       </div>
-      <!-- /.container-fluid -->
+      <!-- col-md-12 -->
     </div>
+    <!-- /.row -->
+    
+
+  </div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
