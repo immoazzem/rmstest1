@@ -35,8 +35,6 @@ $msg = '<div class="alert alert-success alert-dismissible" role="alert">
 
         <div id="messages"></div>
 
-          
-
           <a href="addorder.php" class="btn btn-primary">Add Order</a>
           <br /> <br />
 

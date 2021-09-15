@@ -13,11 +13,9 @@ if(isset($_POST['submit'])){
   $country = $_POST['country'];
   $currency = $_POST['currency'];
 
-  $sql = "UPDATE restaurant_info
-  SET restaurant_name = '$company_name', City= '$service_charge_value', address = '$address', email = '$email', phone = '$phone', country = '$country', service_charge_value = '$service_charge_value', vat_charge_value = '$vat_charge_value', currency = '$currency'
-  WHERE CustomerID = 1";
+  $sql =" UPDATE `restaurant_info` SET `restaurant_name` = '$company_name', `address` = '$address', `email` = '$email', `phone` = '$phone', `service_charge_value` = '$service_charge_value ', `vat_charge_value` = '$vat_charge_value', `currency` = '$currency' WHERE `restaurant_info`.`id` = 1";
   $mysqli->query($sql);
-  if($mysqli->num_rows){
+  if($mysqli->affected_rows){
     $msg = "<span class='bg-success'>Successfully Updated</span>";
   }
 

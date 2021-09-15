@@ -2,11 +2,6 @@
   require_once "partials/_sidebar.php";
   date_default_timezone_set('Asia/Dhaka'); ?>
   <?php
-  // $id = '';
-  // if(isset($_POST['product'])){
-  //   $id = $_POST['product'];
-  // }
-
     $product='';
     $sql = "SELECT * FROM products";
     $result = $mysqli->query($sql);
@@ -27,7 +22,11 @@
       $vat .= $row['vat_charge_value'];
     }
 
-  
+    
+
+
+
+
 
   ?>
 
@@ -97,9 +96,8 @@
                      
                    </tbody>
                    <tfoot>
-                   <tr>
-                      <td></td>
-                      <td></td>
+                   <tr >
+                      <td colspan="2"></td>
                       <th>Gross Amount</th>
                       <td><input type="text" class="form-control" value="" id="gross_amount" name="gross_amount" disabled><input type="hidden" class="form-control" id="gross_amount_value" name="gross_amount_value" autocomplete="off"></td>
                       <td></td>
@@ -107,17 +105,26 @@
                       
                     </tr>
                     <tr>
-                      <td></td>
-                      <td></td>
+                      <td colspan="2"></td>
                       <th style="width:10%">Vat <?php echo $vat ;?> %</th>
                       <td><input type="text" class="form-control" id="vat_charge" name="vat_charge" disabled></td>
                       <td></td>
                     </tr>
                     <tr>
-                      <td></td>
-                      <td></td>
+                      <td colspan="2"></td>
                       <th style="width:10%">Net Amount</th>
                       <td><input type="text" class="form-control" id="net_amount" name="net_amount" disabled></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"></td>
+                      <th style="width:10%">Paymment</th>
+                      <td>
+                        <select name="payment" id="payment" class="form-select">
+                          <option value="Unpaid">Unpaid</option>
+                          <option value="Paid">Paid</option>
+                        </select>
+                      </td>
                       <td></td>
                     </tr>
                   </tfoot>
@@ -206,11 +213,6 @@
 
     });
 
-    
-    
-
-    
-    
 
   });
 
@@ -220,7 +222,6 @@
         total = total.toFixed(2);
         $("#amount_"+row).val(total);
         $("#amount_value_"+row).val(total);
-        
         
         subAmount();
       } else {
